@@ -104,6 +104,8 @@ def test_combination():
     TOL=1e-4  # tolerance
     x1,x2,x3,x4,x5,x6=1,1.2,0.9,37,14,2,1.2
     exp=x1/x2**x3+(x4-x5)*x6
+    str_exp=f'{x1}/{x2}**{x3}+({x4}-{x5})*{x6}'
+    assert np.isclose(exp, calculate(str_exp), tol=TOL)
     
 
 if __name__=='__main__':
