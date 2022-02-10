@@ -7,8 +7,7 @@ parser.add_argument('Expression', metavar='E', type=str)
 args=parser.parse_args()
 
 def calculate(expression):
-    return 0
-    #return eval(expression)
+    return eval(expression)
 
 def test_not_string():
     """
