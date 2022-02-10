@@ -7,5 +7,4 @@ pluggy==1.0.0
 py
 pyparsing
 pytest
-pytest-cov
 tomli
