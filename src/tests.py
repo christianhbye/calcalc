@@ -107,4 +107,3 @@ def test_combination():
     exp = x1 / x2**x3 + (x4 - x5) * x6
     str_exp = f"{x1}/{x2}**{x3}+({x4}-{x5})*{x6}"
     assert np.isclose(exp, calculate(str_exp), atol=TOL)
-
