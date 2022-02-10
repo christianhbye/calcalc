@@ -81,7 +81,7 @@ def test_power():
     """
     TOL=1e-4  # tolerance
     x1,x2=2,4  # numbers to multiply/divide
-    power=x1**s2  # product as computed by python (the true value)
+    power=x1**x2  # product as computed by python (the true value)
     str_power=f'{x1}**{x2}'  # expression to input to calculate
     assert np.isclose(power, calculate(str_power), tol=TOL)
 
