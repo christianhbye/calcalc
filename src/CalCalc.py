@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+import requests
 from typing import Union
 
 parser = ArgumentParser(description="")
@@ -17,10 +18,37 @@ parser.add_argument(
 args = parser.parse_args()
 
 
-def calculate(expression: str) -> Union[int, float]:
+def _calculate(expression: str) -> Union[int, float]:
+    """
+    Evaluate a mathematical expression in Python with the built-in eval()
+
+    Params:
+    expression: str, the mathematical expression to evaluate
+
+    Returns:
+    A number (float or int), the output of the calculation
+    """
     return eval(expression)
+
+def _ask_wolfram(expression: str) -> Union[int, float]:
+    """
+    Use Wolfram Alpha to answer the question of the string
+    """
+    return None  # need to add some code here
+
+def calculate(expression: str, wolfram: bool = False) -> Union[int, float]:
+    """
+    Evaluate a mathematical expresison or answer a question to wolfram
+    
+    Params:
+    expression: str, the mathematical expression to evaluate OR 
+    """
+    if not wolfram:  # use Python
+        return _calculate(expression)
+    else:  # use Wolfram
+        return _ask_wolfram(expression)
 
 
 if __name__ == "__main__":
-    ans = calculate(args.Expression)
+    ans = calculate(args.Expression, args.w)
     print(ans)
