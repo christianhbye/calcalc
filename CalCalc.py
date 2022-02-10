@@ -53,7 +53,7 @@ def test_add_many():
     floats=np.random.uniform(low=LOW, high=HIGH, size=N_NUMS)
     true_sum=floats.sum()  # sum as computed by numpy
     str_sum=[str(f)+'+' for f in floats][:-1]  # remove last +
-    assert np.isclose(true_sum, calculate(str_diff), tol=TOL)
+    assert np.isclose(true_sum, calculate(str_sum), tol=TOL)
 
 def test_multiply_div():
     """
