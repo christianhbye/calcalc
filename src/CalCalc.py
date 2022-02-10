@@ -3,7 +3,18 @@ import numpy as np
 import pytest
 
 parser = ArgumentParser(description="")
-parser.add_argument("Expression", metavar="E", type=str)
+parser.add_argument(
+        "Expression",
+        type=str,
+        help='Input string to calculator. Either to be evaluated by the '
+        'calculator (default) or to be requested to WolframAlpha.'
+        )
+parser.add_argument(
+        '-w',
+        type=bool,
+        default=False,
+        help='Send input to WolframAlpha or not. Default is false'
+        )
 args = parser.parse_args()
 
 
