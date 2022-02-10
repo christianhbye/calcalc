@@ -93,3 +93,18 @@ def test_combination():
     exp = x1 / x2**x3 + (x4 - x5) * x6
     str_exp = f"{x1}/{x2}**{x3}+({x4}-{x5})*{x6}"
     assert np.isclose(exp, calculate(str_exp), atol=TOL)
+
+# def test_wolfram_kwarg():
+#     """
+#     Test the kwarg in calculate that controls CLI vs wolfram
+#     """
+#     # some tests that assertively knows if wolfram is being used...
+#     # don't use Wolfram:
+#     assert calculate(, False)
+#     assert calculate(, 0)  # 0 should be interpreted as False
+# 
+#     # use wolfram:
+#     assert calculate(, True)
+#     assert calcualte(, 1)  # 1 should be True
+#     assert calculate()  # default is True
+# 
