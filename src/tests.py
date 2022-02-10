@@ -3,20 +3,6 @@ import numpy as np
 import pytest
 
 
-def test_not_string():
-    """
-    Calculate should not work when something else than a string is input
-    """
-    with pytest.raises(TypeError):
-        calculate(15)  # int
-    with pytest.raises(TypeError):
-        calculate([1.0, 2.3, 3.4])  # list of floats
-    with pytest.raises(TypeError):
-        calculate(None)  # none
-    with pytest.raises(TypeError):
-        calculate(False)  # bool
-
-
 def test_unexpected_string():
     """
     Calculate should not work when a string has a non-math character
