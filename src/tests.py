@@ -1,4 +1,5 @@
 from .CalCalc import calculate
+import numpy as np
 import pytest
 
 
