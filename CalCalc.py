@@ -37,10 +37,10 @@ def test_add_subtract():
     x1,x2=12,15  # numbers to add
     s=x1+x2  # sum as computed by python (the true value)
     str_sum=f'{x1}+{x2}' # expression to input to calculate
-    assert np.isclose(s, calculate(str_sum), tol=TOL)
+    assert np.isclose(s, calculate(str_sum), atol=TOL)
     diff=x1-x2
     str_diff=f'{x1}-{x2}'
-    assert np.isclose(diff, calculate(str_diff), tol=TOL)
+    assert np.isclose(diff, calculate(str_diff), atol=TOL)
     
 def test_add_many():
     """
@@ -52,7 +52,7 @@ def test_add_many():
     floats=np.random.uniform(low=LOW, high=HIGH, size=N_NUMS)
     true_sum=floats.sum()  # sum as computed by numpy
     str_sum=[str(f)+'+' for f in floats][:-1]  # remove last +
-    assert np.isclose(true_sum, calculate(str_sum), tol=TOL)
+    assert np.isclose(true_sum, calculate(str_sum), atol=TOL)
 
 def test_multiply_div():
     """
@@ -62,10 +62,10 @@ def test_multiply_div():
     x1,x2=12,15  # numbers to multiply/divide
     prod=x1*x2  # product as computed by python (the true value)
     str_prod=f'{x1}*{x2}' # expression to input to calculate
-    assert np.isclose(prod, calculate(str_prod), tol=TOL)
+    assert np.isclose(prod, calculate(str_prod), atol=TOL)
     div=x1/x2
     str_div=f'{x1}/{x2}'
-    assert np.isclose(div, calculate(str_div), tol=TOL)
+    assert np.isclose(div, calculate(str_div), atol=TOL)
 
 def test_div0():
     """
@@ -82,7 +82,7 @@ def test_power():
     x1,x2=2,4  # numbers to multiply/divide
     power=x1**x2  # product as computed by python (the true value)
     str_power=f'{x1}**{x2}'  # expression to input to calculate
-    assert np.isclose(power, calculate(str_power), tol=TOL)
+    assert np.isclose(power, calculate(str_power), atol=TOL)
 
 def test_order():
     """
@@ -93,18 +93,18 @@ def test_order():
     true=(x1+x2)*x3  # () is respected
     false=x1+x2*x3  # () is ignored
     str_exp=f'({x1}+{x2})*{x3}'
-    assert np.isclose(true, calculate(str_exp), tol=TOL)
-    assert not np.isclose(false, calculate(str_exp), tol=TOL)
+    assert np.isclose(true, calculate(str_exp), atol=TOL)
+    assert not np.isclose(false, calculate(str_exp), atol=TOL)
 
 def test_combination():
     """
     Test some long expression involving multiple operations (integration test)
     """
     TOL=1e-4  # tolerance
-    x1,x2,x3,x4,x5,x6=1,1.2,0.9,37,14,2,1.2
+    x1,x2,x3,x4,x5,x6=1,1.2,0.9,37,14,2
     exp=x1/x2**x3+(x4-x5)*x6
     str_exp=f'{x1}/{x2}**{x3}+({x4}-{x5})*{x6}'
-    assert np.isclose(exp, calculate(str_exp), tol=TOL)
+    assert np.isclose(exp, calculate(str_exp), atol=TOL)
     
 
 if __name__=='__main__':
