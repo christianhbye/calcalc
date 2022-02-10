@@ -94,17 +94,25 @@ def test_combination():
     str_exp = f"{x1}/{x2}**{x3}+({x4}-{x5})*{x6}"
     assert np.isclose(exp, calculate(str_exp), atol=TOL)
 
-# def test_wolfram_kwarg():
-#     """
-#     Test the kwarg in calculate that controls CLI vs wolfram
-#     """
-#     # some tests that assertively knows if wolfram is being used...
-#     # don't use Wolfram:
-#     assert calculate(, False)
-#     assert calculate(, 0)  # 0 should be interpreted as False
-# 
-#     # use wolfram:
-#     assert calculate(, True)
-#     assert calcualte(, 1)  # 1 should be True
-#     assert calculate()  # default is True
-# 
+
+def test_wolfram_kwarg(): 
+    """
+    Test the kwarg in calculate that controls CLI vs wolfram by asking a
+    question wolfram will understand but eval() does not.
+    """
+    exp="days in a year"
+    # don't use Wolfram, all should raise NameError:
+    with pytest.raises(NameError):
+        calculate(exp, False)
+    with pytest.raises(NameError):
+        calculate(exp, 0)  # 0 should be interpreted as False
+    with pytest.raises(NameError):
+        calculate(exp)  # default is False
+
+    # use wolfram:
+    try:  # should work
+        calculate(exp, True)
+        calculate(exp, 1) # 1 sould be true
+    except:
+        pytest.fail('Unexpected error')
+
