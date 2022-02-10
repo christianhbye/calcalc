@@ -36,7 +36,7 @@ def test_add_subtract():
     """
     TOL=1e-4  # tolerance
     x1,x2=12,15  # numbers to add
-    s=x1+s2  # sum as computed by python (the true value)
+    s=x1+x2  # sum as computed by python (the true value)
     str_sum=f'{x1}+{x2}' # expression to input to calculate
     assert np.isclose(s, calculate(str_sum), tol=TOL)
     diff=x1-x2
@@ -61,7 +61,7 @@ def test_multiply_div():
     """
     TOL=1e-4  # tolerance
     x1,x2=12,15  # numbers to multiply/divide
-    prod=x1*s2  # product as computed by python (the true value)
+    prod=x1*x2  # product as computed by python (the true value)
     str_prod=f'{x1}*{x2}' # expression to input to calculate
     assert np.isclose(prod, calculate(str_prod), tol=TOL)
     div=x1/x2
