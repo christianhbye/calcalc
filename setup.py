@@ -1,7 +1,4 @@
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup, find_packages
 
 f = open("README.rst", "r")
 readme = f.read()
@@ -16,7 +13,12 @@ setup(
     author="Christian H. Bye",
     author_email="chbye@berkeley.edu",
     url="https://github.com/christianhbye/calcalc",
-    packages=["calcalc"],
+    packages=find_packages(),
+    install_requires=[
+        'numpy',
+        'requests'
+        ],
+    extras_require={'tests': 'pytest'},
     include_package_data=True,
     python_requires=">=3.6",
     license="MIT",
