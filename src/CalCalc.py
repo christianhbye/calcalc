@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from typing import Union
 
 parser = ArgumentParser(description="")
 parser.add_argument(
@@ -16,7 +17,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 
-def calculate(expression):
+def calculate(expression: str) -> Union[int, float]:
     return eval(expression)
 
 
