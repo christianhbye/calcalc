@@ -21,7 +21,7 @@ setup(
         'numpy',
         'requests'
         ],
-    extras_require={'tests': 'pytest'}
+    extras_require={'tests': 'pytest'},
     include_package_data=True,
     python_requires=">=3.6",
     license="MIT",
