@@ -95,12 +95,12 @@ def test_combination():
     assert np.isclose(exp, calculate(str_exp), atol=TOL)
 
 
-def test_wolfram_kwarg(): 
+def test_wolfram_kwarg():
     """
     Test the kwarg in calculate that controls CLI vs wolfram by asking a
     question wolfram will understand but eval() does not.
     """
-    exp="days in a year"
+    exp = "days in a year"
     # don't use Wolfram, all should raise NameError:
     with pytest.raises(SyntaxError):
         calculate(exp, wolfram=False)
@@ -112,18 +112,19 @@ def test_wolfram_kwarg():
     # use wolfram:
     try:  # should work
         calculate(exp, wolfram=True)
-        calculate(exp, wolfram=1) # 1 sould be true
+        calculate(exp, wolfram=1)  # 1 sould be true
     except:
-        pytest.fail('Unexpected error')
+        pytest.fail("Unexpected error")
+
 
 def test_wolfram():
     """
     Compare the answer of a wolfram request to something checked manually
     """
     # true pi as per wolfram alpha (rounded)
-    PI=3.141592653589793238462643383279502884197169399375105820974944592
-    DP=5  # decimal precision
-    TOL=10**(-DP)  # last digit given DP
+    PI = 3.141592653589793238462643383279502884197169399375105820974944592
+    DP = 5  # decimal precision
+    TOL = 10 ** (-DP)  # last digit given DP
     true_pi = np.around(PI, decimals=DP)
-    check_pi = calculate('pi', DP, True)
+    check_pi = calculate("pi", DP, True)
     assert np.isclose(true_pi, check_pi, atol=TOL)
