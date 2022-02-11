@@ -116,3 +116,10 @@ def test_wolfram_kwarg():
     except:
         pytest.fail('Unexpected error')
 
+def test_wolfram():
+    """
+    Compare the answer of a wolfram request to something checked manually
+    """
+    true_pi=3.14159  # as per wolfram alpha (rounded)
+    TOL=1e-5  # last digit of true_pi
+    assert np.isclose(true_pi, calculate('pi', True), atol=TOL)
