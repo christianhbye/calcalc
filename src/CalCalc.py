@@ -18,7 +18,10 @@ def _calculate(expression: str, decimal_precision: int) -> Union[int, float]:
     """
     return np.around(eval(expression), decimals=decimal_precision)
 
-def _ask_wolfram(expression: str, decimal_precision: int) -> Union[int, float]:
+def _ask_wolfram(expression: str, decimal_precision: int) -> Union[
+        int,
+        float,
+        str]:
     """
     Use Wolfram Alpha to answer the question of the string.
 
@@ -35,15 +38,20 @@ def _ask_wolfram(expression: str, decimal_precision: int) -> Union[int, float]:
     url=f'http://api.wolframalpha.com/v2/query?input={url_exp}&appid={APP_ID}'\
             f'&format=plaintext&output=json'
     r = requests.get(url).json()
-    d = r['queryresult']['pods'][1]['subpods'][0]['plaintext'][:-len('...')]
-    d_as_num = _calculate(d, decimal_precision=decimal_precision)
-    return d_as_num
+    # should get the value and discard the unit
+    d = r['queryresult']['pods'][1]['subpods'][0]['plaintext'].split()
+    try:  # try convert to int/float
+        d_out = _calculate(d, decimal_precision=decimal_precision)
+    except(SyntaxError):
+        print(f'Unable to round to {decimal_precision}')
+        d_out = d  # just keep the string
+    return d_out
 
 def calculate(
         expression: str,
         decimal_precision: int = 5,
         wolfram: bool = False
-        ) -> Union[int, float]:
+        ) -> Union[int, float, str]:
     """
     Evaluate a mathematical expresison or answer a question to wolfram
     
@@ -55,7 +63,8 @@ def calculate(
     wolfram: bool, whether to ask wolfram alpha the question. Default is False.
     
     Returns:
-    int or float, the output of the calculation
+    int, float or str, the output of the calculation. Can only be str if the 
+    format of the wolfram output is unexpected
     """
     if not wolfram:  # use Python
         return _calculate(expression, decimal_precision)
