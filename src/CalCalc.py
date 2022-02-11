@@ -1,4 +1,4 @@
-import numpy as np
+import numpy as np # type: ignore
 import requests
 from typing import Union
 import urllib.parse
