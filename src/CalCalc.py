@@ -1,3 +1,4 @@
+import numpy as np
 import requests
 from typing import Union
 import urllib.parse
@@ -15,7 +16,7 @@ def _calculate(expression: str, decimal_precision: int) -> Union[int, float]:
     Returns:
     A number (float or int), the output of the calculation
     """
-    return eval(expression)
+    return np.around(eval(expression), decimals=decimal_precision)
 
 def _ask_wolfram(expression: str, decimal_precision: int) -> Union[int, float]:
     """
@@ -34,8 +35,9 @@ def _ask_wolfram(expression: str, decimal_precision: int) -> Union[int, float]:
     url=f'http://api.wolframalpha.com/v2/query?input={url_exp}&appid={APP_ID}'\
             f'&format=plaintext&output=json'
     r = requests.get(url).json()
-    d = r['queryresult']['pods'][1]['subpods'][0]['plaintext']
-    return np.around(d, decimals=decimal_precision)
+    d = r['queryresult']['pods'][1]['subpods'][0]['plaintext'][:-len('...')]
+    d_as_num = _calculate(d, decimal_precision=decimal_precision)
+    return d_as_num
 
 def calculate(
         expression: str,
@@ -71,11 +73,18 @@ if __name__ == "__main__":
             "calculator (default) or to be requested to WolframAlpha.",
             )
     parser.add_argument(
+            "-decimals",
+            metavar='-d',
+            type=int,
+            default=5,
+            help='Number of digits after decimal point of output'
+            )
+    parser.add_argument(
         "-w",
         type=bool,
         default=False,
         help="Send input to WolframAlpha or not. Default is false",
     )
     args = parser.parse_args()
-    ans = calculate(args.Expression, args.w)
+    ans = calculate(args.Expression, args.decimals, args.w)
     print(ans)
