@@ -103,16 +103,16 @@ def test_wolfram_kwarg():
     exp="days in a year"
     # don't use Wolfram, all should raise NameError:
     with pytest.raises(SyntaxError):
-        calculate(exp, False)
+        calculate(exp, wolfram=False)
     with pytest.raises(SyntaxError):
-        calculate(exp, 0)  # 0 should be interpreted as False
+        calculate(exp, wolfram=0)  # 0 should be interpreted as False
     with pytest.raises(SyntaxError):
         calculate(exp)  # default is False
 
     # use wolfram:
     try:  # should work
-        calculate(exp, True)
-        calculate(exp, 1) # 1 sould be true
+        calculate(exp, wolfram=True)
+        calculate(exp, wolfram=1) # 1 sould be true
     except:
         pytest.fail('Unexpected error')
 
