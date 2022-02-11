@@ -42,7 +42,7 @@ def _ask_wolfram(expression: str, decimal_precision: int) -> Union[
     d = r['queryresult']['pods'][1]['subpods'][0]['plaintext'].split()
     try:  # try convert to int/float
         d_out = _calculate(d, decimal_precision=decimal_precision)
-    except(SyntaxError):
+    except(SyntaxError, TypeError):
         print(f'Unable to round to {decimal_precision}')
         d_out = d  # just keep the string
     return d_out
