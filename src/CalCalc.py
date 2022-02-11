@@ -1,5 +1,6 @@
 import requests
 from typing import Union
+import urllib.parse
 
 
 def _calculate(expression: str) -> Union[int, float]:
@@ -18,12 +19,13 @@ def _ask_wolfram(expression: str) -> Union[int, float]:
     """
     Use Wolfram Alpha to answer the question of the string
     """
-    url='http://api.wolframalpha.com/v2/query?input='\
-            + expression\
-            + '&appid=GETY26-72YYRUHXPV'
-    r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
-    d = r.json()
-    return None  # need to add some code here
+    APP_ID='GETY26-72YYRUHXPV'
+    url_exp=urllib.parse.quote_plus(expression)  # convert to url format
+    url=f'http://api.wolframalpha.com/v2/query?input={url_exp}&appid={APP_ID}'\
+            f'&format=plaintext&output=json'
+    r = requests.get(url).json()
+    d = r['queryresult']['pods'][0]['subpods'][0]
+    return d['plaintext']  # need to add some code here
 
 def calculate(expression: str, wolfram: bool = False) -> Union[int, float]:
     """
