@@ -120,6 +120,10 @@ def test_wolfram():
     """
     Compare the answer of a wolfram request to something checked manually
     """
-    true_pi=3.14159  # as per wolfram alpha (rounded)
-    TOL=1e-5  # last digit of true_pi
-    assert np.isclose(true_pi, calculate('pi', True), atol=TOL)
+    # true pi as per wolfram alpha (rounded)
+    PI=3.141592653589793238462643383279502884197169399375105820974944592
+    DP=5  # decimal precision
+    TOL=10**(-DP)  # last digit given DP
+    true_pi = np.around(PI, decimals=DP)
+    check_pi = calculate('pi', DP, True)
+    assert np.isclose(true_pi, check_pi, atol=TOL)
