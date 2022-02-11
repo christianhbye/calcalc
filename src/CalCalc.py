@@ -18,9 +18,9 @@ def _ask_wolfram(expression: str) -> Union[int, float]:
     """
     Use Wolfram Alpha to answer the question of the string
     """
-    url='http://api.wolframalpha.com/v2/query?input='
-    + expression
-    + '&appid=GETY26-72YYRUHXPV'
+    url='http://api.wolframalpha.com/v2/query?input='\
+            + expression\
+            + '&appid=GETY26-72YYRUHXPV'
     r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
     d = r.json()
     return None  # need to add some code here
