@@ -38,12 +38,11 @@ def _ask_wolfram(expression: str, decimal_precision: int) -> Union[
     url=f'http://api.wolframalpha.com/v2/query?input={url_exp}&appid={APP_ID}'\
             f'&format=plaintext&output=json'
     r = requests.get(url).json()
-    # should get the value and discard the unit
-    d = r['queryresult']['pods'][1]['subpods'][0]['plaintext'].split()
+    d = r['queryresult']['pods'][1]['subpods'][0]['plaintext']
     try:  # try convert to int/float
-        d_out = _calculate(d, decimal_precision=decimal_precision)
+        d_out = _calculate(d.split(), decimal_precision=decimal_precision)
     except(SyntaxError, TypeError):
-        print(f'Unable to round to {decimal_precision}')
+        print(f'Unable to round to {decimal_precision} decimals')
         d_out = d  # just keep the string
     return d_out
 
