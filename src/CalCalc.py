@@ -41,7 +41,12 @@ def calculate(expression: str, wolfram: bool = False) -> Union[int, float]:
     Evaluate a mathematical expresison or answer a question to wolfram
     
     Params:
-    expression: str, the mathematical expression to evaluate OR 
+    expression: str, the mathematical expression to evaluate OR a question
+    to be answered by Wolfram Alpha
+    wolfram: bool, whether to ask wolfram alpha the question. Default is False.
+    
+    Returns:
+    int or float, the output of the calculation
     """
     if not wolfram:  # use Python
         return _calculate(expression)
