@@ -94,17 +94,36 @@ def test_combination():
     str_exp = f"{x1}/{x2}**{x3}+({x4}-{x5})*{x6}"
     assert np.isclose(exp, calculate(str_exp), atol=TOL)
 
-# def test_wolfram_kwarg():
-#     """
-#     Test the kwarg in calculate that controls CLI vs wolfram
-#     """
-#     # some tests that assertively knows if wolfram is being used...
-#     # don't use Wolfram:
-#     assert calculate(, False)
-#     assert calculate(, 0)  # 0 should be interpreted as False
-# 
-#     # use wolfram:
-#     assert calculate(, True)
-#     assert calcualte(, 1)  # 1 should be True
-#     assert calculate()  # default is True
-# 
+
+def test_wolfram_kwarg(): 
+    """
+    Test the kwarg in calculate that controls CLI vs wolfram by asking a
+    question wolfram will understand but eval() does not.
+    """
+    exp="days in a year"
+    # don't use Wolfram, all should raise NameError:
+    with pytest.raises(SyntaxError):
+        calculate(exp, wolfram=False)
+    with pytest.raises(SyntaxError):
+        calculate(exp, wolfram=0)  # 0 should be interpreted as False
+    with pytest.raises(SyntaxError):
+        calculate(exp)  # default is False
+
+    # use wolfram:
+    try:  # should work
+        calculate(exp, wolfram=True)
+        calculate(exp, wolfram=1) # 1 sould be true
+    except:
+        pytest.fail('Unexpected error')
+
+def test_wolfram():
+    """
+    Compare the answer of a wolfram request to something checked manually
+    """
+    # true pi as per wolfram alpha (rounded)
+    PI=3.141592653589793238462643383279502884197169399375105820974944592
+    DP=5  # decimal precision
+    TOL=10**(-DP)  # last digit given DP
+    true_pi = np.around(PI, decimals=DP)
+    check_pi = calculate('pi', DP, True)
+    assert np.isclose(true_pi, check_pi, atol=TOL)
