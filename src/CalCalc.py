@@ -40,7 +40,10 @@ def _ask_wolfram(expression: str, decimal_precision: int) -> Union[
     r = requests.get(url).json()
     d = r['queryresult']['pods'][1]['subpods'][0]['plaintext']
     try:  # try convert to int/float
-        d_out = _calculate(d.split(), decimal_precision=decimal_precision)
+        d = d.split()[0]  # try to discard units
+        if d[-3:] == '...': # get rid of dots in infinite decimals
+            d = d[:-3]
+        d_out = _calculate(d, decimal_precision=decimal_precision)
     except(SyntaxError, TypeError):
         print(f'Unable to round to {decimal_precision} decimals')
         d_out = d  # just keep the string
