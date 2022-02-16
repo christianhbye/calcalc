@@ -25,6 +25,27 @@ To use CalCalc, you would need to clone this repository and install it. We sugge
 
 This install all dependencies in the virtual environment, along with CalCalc.
 
+Quick start
+############
+CalCalc can either run as an application in the command line or be imported as a Python module.
+
+From the command line, run for example:
+
+.. code:: bash
+
+    python CalCalc.py '2*2'  # 4, using the calculator
+    python CalCalc.py 'pi' -d 3 -w True  # 3.142, request the value of pi to 3 decimal digits from Wolfram Alpha
+    
+Get the full documnetation with :code:`python CalCalc.py --help`.
+
+To import CalCalc as a python module in for example IPython, you'd want to do:
+
+.. code:: Python
+
+    >> import CalCalc as cc
+    >> cc.calculate('2*2')  # 4
+    >> cc.calculate('pi', decimal_precision=3, wolfram=True)  # 3.142
+
 Contributing
 ############
 Contributions are welcome! Please create an `issue <https://github.com/christianhbye/calcalc/issues>`_ to report bugs or suggest improvements. If you have written code you'd like to contribute, you may also go ahead an make a `pull request <https://github.com/christianhbye/calcalc/pulls>`_. We suggest installing the repositiory in developer mode (using :code:`python -m pip install .[dev]` when installing) to get some extra tools for testing, type hinting, and checking style.
