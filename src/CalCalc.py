@@ -79,8 +79,8 @@ if __name__ == "__main__":
     from argparse import ArgumentParser
 
     parser = ArgumentParser(
-        description="Evaluate a mathematical expression or ask Wolfram Alpha"
-        "a question."
+        description="Evaluate a mathematical expression or ask WolframAlpha"
+        " a question."
     )
     parser.add_argument(
         "Expression",
